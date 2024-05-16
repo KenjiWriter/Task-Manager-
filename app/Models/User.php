@@ -45,12 +45,12 @@ class User extends Authenticatable
     // Relacje
     public function projects()
     {
-        return $this->belongsToMany(Project::class, 'project_user', 'user_id', 'project_id')->withPivot('role');
+        return $this->belongsToMany(Project::class, 'project_users', 'user_id', 'project_id')->withPivot('role');
     }
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'assigned_to');
+        return $this->belongsToMany(Task::class, 'task_users');
     }
 
     public function taskComments()

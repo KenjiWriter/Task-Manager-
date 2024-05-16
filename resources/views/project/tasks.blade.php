@@ -20,17 +20,17 @@
                             <tr>
                                 <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
                                 <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Description</th>
-                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Team size</th>
-                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Last update</th>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Due Time</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-700">
-                            @foreach ($projects as $project)
+                            @foreach ($tasks as $task)
                             <tr>
-                                <td class="w-1/3 text-left py-3 px-4 text-blue-500"><a href="{{ route('project.tasks', $project->id) }}">{{ $project->name }}</a></td>
-                                <td class="w-1/3 text-left py-3 px-4">{{ $project->description }}</td>
-                                <td class="text-left py-3 px-4">{{ $project->users->count() }}</td>
-                                <td class="text-left py-3 px-4">{{ $project->updated_at->format('Y-m-d') }}</td>
+                                <td class="w-1/3 text-left py-3 px-4">{{ $task->name }}</td>
+                                <td class="w-1/3 text-left py-3 px-4">{{ $task->description }}</td>
+                                <td class="text-left py-3 px-4">{{ $task->status_label }}</td>
+                                <td class="text-left py-3 px-4">{{ $task->due_date }}</td>
                             </tr>
                             @endforeach
                         </tbody>

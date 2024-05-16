@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,31 +13,30 @@ class Task extends Model
         'name',
         'description',
         'due_date',
-        'priority',
         'status',
         'project_id',
-        'assigned_to',
         'estimated_hours',
     ];
 
-    // Relacje
+    protected $statusLabels = [
+        0 => 'New',
+        1 => 'In Progress',
+        2 => 'Ready to Order',
+        3 => 'Closed',
+    ];
+
     public function project()
     {
         return $this->belongsTo(Project::class);
     }
 
-    public function assignedUser()
+    public function getStatusLabelAttribute()
     {
-        return $this->belongsTo(User::class, 'assigned_to');
+        return $this->statusLabels[$this->status] ?? 'Unknown';
     }
 
-    public function comments()
+    public function users()
     {
-        return $this->hasMany(TaskComment::class);
-    }
-
-    public function times()
-    {
-        return $this->hasMany(TaskTime::class);
+        return $this->belongsToMany(User::class, 'task_users', 'task_id', 'user_id');
     }
 }

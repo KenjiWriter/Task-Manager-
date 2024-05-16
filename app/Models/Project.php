@@ -25,6 +25,6 @@ class Project extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasManyThrough(Task::class, TaskUser::class, 'project_id', 'id', 'id', 'task_id');
     }
 }
